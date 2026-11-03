@@ -4,3 +4,12 @@
 
 - 기획 위키: https://claude.ai/artifact/4DLkJhJA5DNNAUkvVTj7Ke
 - 기술: TypeScript + Phaser 3 + Vite
+
+## 실행
+
+```bash
+npm install
+npm run dev     # http://localhost:5173 에서 실행
+npm test        # 규칙 테스트
+npm run shot    # 스크린샷으로 화면 확인 (screenshots/)
+```
