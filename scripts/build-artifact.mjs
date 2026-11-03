@@ -19,12 +19,11 @@ const out = await build({
 const js = out.outputFiles[0].text.replace(/<\/script/gi, "<\\/script");
 
 const html = `<title>별의 정령 프로토타입</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
   :root { --bg: #05040b; color-scheme: dark; }
-  html, body { height: 100%; }
-  body { background: var(--bg); overflow: hidden; }
-  #game { width: 100%; height: 100%; }
-  #game canvas { image-rendering: pixelated; touch-action: none; }
+  html, body { height: 100%; margin: 0; }
+  body { background: var(--bg); overflow: hidden; display: flex; }
 </style>
 <div id="game"></div>
 <script src="https://cdn.jsdelivr.net/npm/phaser@${phaserVersion}/dist/phaser.min.js"></script>

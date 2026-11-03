@@ -27,9 +27,11 @@ try {
   const box = await page.locator("canvas").boundingBox();
   const k = box.width / 320;
   const at = (x, y) => ({ x: box.x + x * k, y: box.y + y * k });
-  const hexPos = (q, r) => at(70 + 15 * q, 38 + 10 * Math.sqrt(3) * (r + 0.5 * (q & 1)));
+  // same layout as src/render/layout.ts (squashed flat-top, radius 12)
+  const hexPos = (q, r) => at(68 + 18 * q, 24 + 12 * 1.732 * 0.72 * (r + 0.5 * (q & 1)));
 
   const from = hexPos(2, 3), to = hexPos(3, 3);
+  await page.mouse.move(hexPos(5, 1).x, hexPos(5, 1).y);
   await page.mouse.move(from.x, from.y);
   await page.mouse.down();
   await page.mouse.move((from.x + to.x) / 2, to.y, { steps: 4 });
@@ -38,6 +40,11 @@ try {
   await page.mouse.up();
   await page.waitForTimeout(500);
   await page.screenshot({ path: "screenshots/03-moved.png" });
+
+  // end the turn: enemies pass one by one, then it's the spirit's turn again
+  await page.keyboard.press("Space");
+  await page.waitForTimeout(1600);
+  await page.screenshot({ path: "screenshots/04-next-turn.png" });
 } finally {
   await browser.close();
   await server.close();
